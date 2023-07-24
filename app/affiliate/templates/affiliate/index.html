@@ -1,0 +1,251 @@
+{%extends 'affiliate/base.html'%}
+{%block banner %}
+
+<div class="banner">
+
+  <div class="container">
+
+    <div class="slider-container has-scrollbar">
+
+      <div class="slider-item">
+
+        <img src="/static/assets/images/banner-2.jpg" alt="women's latest fashion sale" class="banner-img">
+
+        <div class="banner-content">
+
+          <p class="banner-subtitle">Trending item</p>
+
+          <h2 class="banner-title">Women's latest fashion sale</h2>
+
+          <p class="banner-text">
+            starting at &dollar; <b>20</b>.00
+          </p>
+
+          <a href="#" class="banner-btn">Shop now</a>
+
+        </div>
+
+      </div>
+
+      <div class="slider-item">
+
+        <img src="/static/assets/images/banner-2.jpg" alt="modern sunglasses" class="banner-img">
+
+        <div class="banner-content">
+
+          <p class="banner-subtitle">Trending accessories</p>
+
+          <h2 class="banner-title">Modern sunglasses</h2>
+
+          <p class="banner-text">
+            starting at &dollar; <b>15</b>.00
+          </p>
+
+          <a href="#" class="banner-btn">Shop now</a>
+
+        </div>
+
+      </div>
+
+      <div class="slider-item">
+
+        <img src="/static/assets/images/banner-3.jpg" alt="new fashion summer sale" class="banner-img">
+
+        <div class="banner-content">
+
+          <p class="banner-subtitle">Sale Offer</p>
+
+          <h2 class="banner-title">New fashion summer sale</h2>
+
+          <p class="banner-text">
+            starting at &dollar; <b>29</b>.99
+          </p>
+
+          <a href="#" class="banner-btn">Shop now</a>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+{%endblock%}
+
+{%block main %}
+
+
+
+<div class="category">
+
+  <div class="container mySlides">
+
+    <div class="category-item-container has-scrollbar">
+      {%for product in products|slice:10%}
+      <div class="category-item ">
+
+        <div class="category-img-box">
+          <img src="/media/{{product.product_home_page_image}}" alt="dress & frock" width="30">
+        </div>
+
+        <div class="category-content-box">
+
+          <div class="category-content-flex">
+            <h3 class="category-item-title">{{product.product_title}}</h3>
+
+         
+          </div>
+
+          <a href="{{product.slug}}" class="category-btn">Details</a>
+
+        </div>
+        
+      </div>
+      {%endfor%}
+     
+    </div>
+
+  </div>
+
+</div>
+<!--
+  - PRODUCT FEATURED
+-->
+
+
+
+<!--
+  - PRODUCT GRID
+-->
+
+<div class="product-main">
+  {%for product_cat in product_cats %} <br>
+  <h2 class="title">{{product_cat.cat_name}}</h2>
+ 
+  <div class="product-grid">
+    {%for product in products %}
+    {%if product_cat.id == product.product_main_cat_id%}
+    <div class="showcase">
+
+      <div class="showcase-banner">
+
+        <img src="/media/{{product.product_home_page_image}}" alt="Mens Winter Leathers Jackets" width="300" class="product-img default">
+        <img src="/media/{{product.product_detail_image}}" alt="Mens Winter Leathers Jackets" width="300" class="product-img hover">
+
+        <div class="showcase-actions">
+
+          <!-- <button class="btn-action cart small-cart-btn" id="pr{{product.id}}">
+            <ion-icon name="heart-outline"></ion-icon>
+          </button>
+           -->
+
+          <!-- <button class="btn-action">
+            <ion-icon name="eye-outline"></ion-icon>
+          </button>
+
+          <button class="btn-action">
+            <ion-icon name="repeat-outline"></ion-icon>
+          </button>
+
+          <button class="btn-action">
+            <ion-icon name="bag-add-outline"></ion-icon>
+          </button> -->
+
+        </div>
+
+      </div>
+
+      <div class="showcase-content">
+
+        <a href="/{{product.slug}}/details" class="showcase-category" id="slugpr{{product.id}}"><span id="namepr{{product.id}}" class="product-title">{{product.product_title}}</span></a>
+
+        <a href="brand/{{product.product_brand.slug}}" id="slugpr{{product.id}}">
+           <h3 class="showcase-title"> Brand: {{product.product_brand.brand_name}}</h3>
+        </a>
+
+     
+
+        <div class="price-box">
+         <button class="add-cart-btn cart-btn" id="pr{{product.id}}" style="font-size:13px ">Add To Favorite</button>
+        </div>
+
+      </div>
+    </div>
+    {%endif%}
+    {%endfor%}
+   
+    </div> 
+   
+    {%endfor%}
+
+  </div>
+
+
+
+</div>
+
+
+
+
+
+</div>
+
+</div>
+
+</div>
+
+
+<div>
+
+
+</div>
+
+
+
+
+
+<!--
+  - BLOG
+-->
+
+<div class="blog">
+
+  <div class="container">
+    <div><h2 class="title">Blogs</h2></div>
+
+    <div class="blog-container has-scrollbar">
+      {% for blog in blogs %}
+      <div class="blog-card">
+
+        <a href="{{blog.get_absolute_url}}">
+          <img src="/media/{{blog.blog_pic}}" alt="Clothes Retail KPIs 2021 Guide for Clothes Executives" class="blog-banner">
+        </a>
+
+        <div class="blog-content">
+
+          <a href="#" class="blog-category">{{blog.blog_cat|title}}</a>
+
+          <a href="{{blog.get_absolute_url}}">
+            <h3 class="blog-title">{{blog.blog_title|title}}</h3>
+          </a>
+
+          <p class="blog-meta">
+             <cite>Date Posted: </cite> / <time datetime="2022-04-06">{{blog.create_at}}</time>
+          </p>
+
+        </div>
+
+      </div>
+      {%endfor%}
+    </div>
+
+  </div>
+
+  
+
+</div>
+{%endblock%}
+

@@ -1,0 +1,226 @@
+{%extends 'affiliate/base.html' %}
+
+{%block title%}
+<title>{{product.product_title}}</title>
+{%endblock%}
+
+{%block main %}
+
+
+<div class="product-featured">
+
+  <h1 class="main-title">{{product.product_title|title}}</h1>
+  
+    <div class="showcase-wrapper has-scrollbar">
+  
+      <div class="showcase-container">
+  
+        <div class="showcase">
+          
+          <div class="showcase-banner">
+            <img src="/media/{{product.product_home_page_image}}"  alt="{{product.product_title}}" class="showcase-img">
+            <a href="{{product.affiliate_link}}" style="text-align:center; margin-top: 5px;" class="add-cart-btn check-price-btn">Check Price</a>
+          </div>
+          
+          <div class="showcase-content">
+            <table class="">
+                <tbody>
+                  <tr class="tabletr">
+                    <td scope="col">Name: </td>
+                    <td>{{product.product_title|title}}</td>
+                   
+                  </tr>
+                  <tr>
+                    <td scope="col">Category : </td>
+                    <td>{{product.product_main_cat|title}}</td>
+                   
+                  </tr>
+                  <tr>
+                    <td scope="col">Brand : </td>
+                    <td>{{product.product_brand}}</td>
+                   
+                  </tr>
+                  <tr>
+                    <td scope="col">Material Type : </td>
+                    <td>
+                      {{ product.material_type|title }}
+                    </td>
+                   
+                  </tr>
+                  <tr>
+                    <td scope="col">Weight : </td>
+                    <td>{{product.item_weight}}</td>
+                   
+                  </tr>
+                  <tr>
+                    <td scope="col">Manufacturer: </td>
+                    <td>{{product.manufacturer|title}}</td>
+                   
+                  </tr>
+                  <tr>
+                    <td scope="col">Gender : </td>
+                    <td>{{product.gender_type|title}}</td>
+                  </tr>
+
+                  <tr>
+                    <td scope="col">available colors : </td>
+                    <td>{% for colors in product.color_name.all %}
+                      <div class="circle" style="background-color:{{colors}}"></div>
+                    {%endfor%}</td>
+                  </tr>
+                  <!-- <tr><div class="circle"></div></tr> -->
+                  
+                </tbody>
+              </table>
+              <hr>
+              <br>
+              <br>
+              <table >
+                <tr >
+                  <td >
+                <img class="productPic" src="/media/{{product.product_detail_image}}" alt="{{product.product_title}}" width="100px" height="100px">  
+              </td>
+              <td>
+                <img class="productPic1" src="/media/{{product.product_detail_image1}}" alt="{{product.product_title}}" width="100px" height="100px">  
+              </td>
+              <td>
+                <img class="productPic2" src="/media/{{product.product_detail_image2}}" alt="{{product.product_title}}" width="100px" height="100px">
+              </td>
+              </tr>
+              
+              
+              </table>
+              <br><br>
+              <hr>
+          
+              </div>
+  
+            </div>
+
+            <h2 style="font-size: 20px; margin-top: 10px;">Product Description</h2>
+            <div >
+            <p class="short-desc" >{{product.product_long_description|safe}}</p>
+              </div>
+          </div>
+        </div>
+  
+  
+      </div>
+      <h3>Similer Products</h3>
+      <div class="product-main">
+      <div class="product-grid">
+      {%for product in similer_brand_products %}
+          <div class="showcase">
+            <div class="showcase-banner">
+              <img src="/media/{{product.product_home_page_image}}" alt="Mens Winter Leathers Jackets" width="300" class="product-img default">
+              <img src="/media/{{product.product_detail_image}}" alt="Mens Winter Leathers Jackets" width="300" class="product-img hover">
+              <div class="showcase-actions">
+                <button class="btn-action">
+                  <ion-icon name="heart-outline"></ion-icon>
+                </button>
+      
+                <button class="btn-action">
+                  <ion-icon name="eye-outline"></ion-icon>
+                </button>
+      
+                <button class="btn-action">
+                  <ion-icon name="repeat-outline"></ion-icon>
+                </button>
+      
+                <button class="btn-action">
+                  <ion-icon name="bag-add-outline"></ion-icon>
+                </button>
+      
+              </div>
+      
+            </div>
+      
+            <div class="showcase-content" style="text-align:center ;">
+              <a href="/{{product.slug}}/details" class="showcase-category" id="slugpr{{product.id}}"><span id="namepr{{product.id}}">{{product.product_title}}</span></a>
+
+              <a href="brand/{{product.product_brand.slug}}" id="slugpr{{product.id}}">
+                 <h3 class="showcase-title"> Brand: {{product.product_brand.brand_name}}</h3>
+              </a>
+           
+      
+              <div class="price-box">
+               <button class="add-cart-btn" style="font-size: 13px;">Add To Favorite</button>
+              </div>
+      
+            </div>
+          </div>
+        
+         
+        
+         
+          {%endfor%}
+        </div> 
+        </div>
+
+        <h3>Related Products</h3>
+      <div class="product-main">
+      <div class="product-grid">
+      {%for product in related_products %}
+          <div class="showcase">
+      
+            <div class="showcase-banner">
+      
+              <img src="/media/{{product.product_home_page_image}}" alt="Mens Winter Leathers Jackets" width="300" class="product-img default">
+              <img src="/media/{{product.product_detail_image}}" alt="Mens Winter Leathers Jackets" width="300" class="product-img hover">
+      
+              <div class="showcase-actions">
+      
+                <button class="btn-action">
+                  <ion-icon name="heart-outline"></ion-icon>
+                </button>
+      
+                <button class="btn-action">
+                  <ion-icon name="eye-outline"></ion-icon>
+                </button>
+      
+                <button class="btn-action">
+                  <ion-icon name="repeat-outline"></ion-icon>
+                </button>
+      
+                <button class="btn-action">
+                  <ion-icon name="bag-add-outline"></ion-icon>
+                </button>
+      
+              </div>
+      
+            </div>
+      
+            <div class="showcase-content">
+      
+              <a href="/{{product.slug}}/details" class="showcase-category">{{product.product_title}}</a>
+      
+              <a href="/brand/{{product.product_brand.slug}}">
+                 <h3 class="showcase-title"> Brand: {{product.product_brand.brand_name}}</h3>
+              </a>
+      
+              <div class="price-box">
+               <button class="add-cart-btn" style="font-size: 13px">Add To Favorite</button>
+              </div>
+      
+            </div>
+          </div>
+        
+         
+        
+         
+          {%endfor%}
+        </div> 
+        </div>
+      
+      
+      
+      </div>
+
+  
+    </div>
+  
+  </div>
+  
+  
+{%endblock%}
+

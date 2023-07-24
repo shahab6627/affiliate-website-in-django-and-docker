@@ -1,0 +1,125 @@
+{%extends 'affiliate/base.html' %}
+
+
+{%block main %}
+
+
+<div class="product-featured">
+
+  <h1>{{blog.blog_title|title}}</h1>
+  
+    <div class="showcase-wrapper has-scrollbar" >
+  
+      <div class="showcase-container">
+  
+        <div class="showcase">
+          
+        
+          <div class="showcase-content">
+            <a href="#">
+              
+            </a>
+  
+            <p class="showcase-desc">
+              {{blog.blog_short_description|safe}} <br>
+            
+            </p>
+
+            
+              </div>
+  
+            </div>
+  
+        
+        {{blog.blog_body|safe}}
+            <hr>
+        <div>
+
+
+          <div class="newsletter-title">Comments</div>
+          {%for comments in blog_comments %}
+          <div class="comment-box">
+          <div><span class="user-span">User: {{comments.name}}</span>
+            <span class="date-span">Posted at: {{comments.date}}</span>
+          </div>
+          <div>{{comments.comment}}</div>
+        
+          </div>
+          {%endfor%}
+
+          <hr style="margin-top:10px">
+          <form action="#" id="comment-form">
+
+            <div class="newsletter-header">
+        
+              <h3 class="newsletter-title">Leave A Comment</h3>
+        
+            
+        
+            </div>
+          
+            <input type="hidden" id="blog-id" value="{{blog.id}}">
+        
+            <input type="email" name="email" id="email" class="email-field" placeholder="Email Address" required>
+            
+            <input type="text" name="name" id="name" class="email-field" placeholder="Name" required>
+            <textarea name="" id="comment" class="email-field" placeholder="Enter Your Comment" style="width: 100%; height:200px"></textarea>
+            {%csrf_token%}
+            <button type="submit" class="comment-btn">Submit</button>
+          </form>
+          
+          <div style="margin-left:50%" id="spinner-box" class="not-visible"><img src="/static/assets/spinner/loading.gif" alt=""></div>
+        </div>
+  
+      </div>
+    </div>
+    </div>
+    
+  </div>
+  
+    </div>
+  
+  </div>
+
+  <!-- related blogs  -->
+  <div class="blog">
+
+    <div class="container">
+      <div><h2 class="title">Blogs</h2></div>
+    
+      <div class="blog-container has-scrollbar">
+        {% for blog in blog_cat %}
+        <div class="blog-card">
+  
+          <a href="{{blog.get_absolute_url}}">
+            <img src="/media/{{blog.blog_pic}}" alt="Clothes Retail KPIs 2021 Guide for Clothes Executives" width="100" class="blog-banner">
+          </a>
+  
+          <div class="blog-content">
+  
+            <a href="#" class="blog-category">{{blog.blog_cat|title}}</a>
+  
+            <a href="{{blog.get_absolute_url}}">
+              <h3 class="blog-title">{{blog.blog_title|title}}</h3>
+            </a>
+  
+            <p class="blog-meta">
+               <cite>Date Posted: </cite> / <time datetime="2022-04-06">{{blog.create_at}}</time>
+            </p>
+  
+          </div>
+  
+        </div>
+        {%endfor%}
+      </div>
+  
+    </div>
+
+{%endblock%}
+
+<!-- importing js block  -->
+
+{%block js %} 
+<script src="/static/assets/js/comment.js"></script>
+
+{%endblock%}
